@@ -42,9 +42,30 @@ with open("Inputs\Day3Input.txt") as input:
                 start_param_two = True
                 continue
         
-        
         restart()
         if c == "m":
             instruction_step += 1
 
 print(total)
+
+'''
+ALT: Solution using regex and loading it on memory
+
+import re
+input = open("Inputs\Day3Input.txt", "r")
+input = input.read()
+
+total_sum = 0
+
+pattern = "mul\(\d{1,3}\,\d{1,3}\)"
+
+x = re.findall(pattern, input)
+
+for command in x:
+    mult = int(command[4:command.index(",")]) * int(command[command.index(",") + 1:command.index(")")])
+    total_sum += mult
+
+print(total_sum)
+
+'''
+
