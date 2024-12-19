@@ -24,9 +24,9 @@ class LinkedList:
         global rules
         current = self.head
         prev = None
+        new_node = Node(new_num)
         while current is not None:
             if has_rule(current.value, new_num):
-                new_node = Node(new_num)
                 new_node.next = current
                 if prev is None:  
                     self.head = new_node
@@ -35,7 +35,10 @@ class LinkedList:
                 return
             prev = current
             current = current.next
-        self.insert_head(new_num) 
+        if prev is None:  
+            self.head = new_node
+        else: 
+            prev.next = new_node
             
     
     def insert_head(self, element):
@@ -107,11 +110,6 @@ with open("Inputs/Day5Input.txt", "r") as input_file:
                 llist.clear()
                 for num in order:
                     llist.insert(int(num))
-
-                print(order)
-                print(llist.get_list())
-                print("")
-                
                 total += get_middle_page(llist.get_list())
             
             order = []
